@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     @vite('resources/css/app.css')
-    <title>Document</title>
+    @vite('resources/css/app.css')
+    <title>Chat App</title>
 </head>
-<body>
+<body class="bg-gray-100 w-screen overflow-hidden">
     <x-navbar></x-navbar>
+
+    <div class="flex h-screen  w-[72.5%] float-end overflow-hidden">
+        @yield('content')
+    </div>
 </body>
 </html>

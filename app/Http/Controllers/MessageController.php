@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Pusher\Pusher;
 
 class MessageController extends Controller
 {
@@ -12,7 +13,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('pages.index');
     }
 
     /**
@@ -28,7 +30,14 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'message' => 'required'
+        ]);
+
+        Message::create($request->all());
+
+
+        return redirect()->route('chat.index');
     }
 
     /**
