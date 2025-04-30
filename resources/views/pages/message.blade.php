@@ -31,7 +31,7 @@
     @endforeach
 
 
- <footer class="bg-white border-t border-gray-300 p-4 absolute bottom-0 w-[73%]">
+ <footer class="bg-white border-t border-gray-300 p-4 absolute bottom-0 w-[72.5%] right-0">
     <form id="chat-form" class="flex items-center w-full">
 
         @csrf
