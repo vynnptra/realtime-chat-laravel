@@ -12,36 +12,29 @@
       </div>
       <ul role="list" class="relative z-0 divide-y divide-gray-200 bg-white">
   
-        <!-- Item 1 -->
-        <li class="bg-white">
-          <a href="{{ url('/test') }}" class="relative flex items-center space-x-3 px-6 py-5 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 hover:bg-gray-50">
-            <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
-            </div>
-            <div class="min-w-0 flex-1">
-              <span class="absolute inset-0" aria-hidden="true"></span>
-              <p class="text-sm font-medium text-gray-900">Kristin Watson</p>
-              <p class="truncate text-sm text-gray-500">VP, Human Resources</p>
-            </div>
-          </a>
-        </li>
-  
-        <!-- Item 2 -->
-        <li class="bg-white">
-          <a href="#" class="relative flex items-center space-x-3 px-6 py-5 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 hover:bg-gray-50">
-            <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
-            </div>
-            <div class="min-w-0 flex-1">
-              <span class="absolute inset-0" aria-hidden="true"></span>
-              <p class="text-sm font-medium text-gray-900">Emily Wilson</p>
-              <p class="truncate text-sm text-gray-500">VP, User Experience</p>
-            </div>
-          </a>
-        </li>
-  
+        @php
+           use App\Models\Contact;
+           $contacts = Contact::where('user_id', auth()->user()->id)->get();
+        @endphp
 
-          <a href="#" class="relative flex items-center text-sm  space-x-3 px-6 py-5 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 hover:bg-gray-50 ">
+        <!-- Item 1 -->
+        @foreach ($contacts as $contact)
+
+        <li class="bg-white">
+          <a href="{{ route('chat.show', $contact->contact_id) }}" class="relative flex items-center space-x-3 px-6 py-5 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 hover:bg-gray-50">
+            <div class="flex-shrink-0">
+              <img class="h-10 w-10 rounded-full" src="https://images.icon-icons.com/2644/PNG/512/person_fill_icon_159457.png" alt="">
+            </div>
+            <div class="min-w-0 flex-1">
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              <p class="text-sm font-medium text-gray-900">{{ $contact->name }}</p>
+              <p class="truncate text-sm text-gray-500">{{ $contact->contact_id }}</p>
+            </div>
+          </a>
+        </li>
+        @endforeach
+
+          <a href="{{ route('contact.create') }}" class="relative flex items-center text-sm  space-x-3 px-6 py-5 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 hover:bg-gray-50 ">
             <div class="flex-shrink-0">
               <p>Add Contact</p>
             </div>

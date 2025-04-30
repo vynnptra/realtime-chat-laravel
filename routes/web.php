@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::get('chat/{chat}/edit', [MessageController::class, 'edit'])->name('chat.edit');
     Route::put('chat/{chat}', [MessageController::class, 'update'])->name('chat.update');
     Route::delete('chat/{chat}', [MessageController::class, 'destroy'])->name('chat.destroy');
+
+    Route::resource('contact', ContactController::class);
 });
 
 Route::middleware('guest')->group( function () {
@@ -26,3 +29,4 @@ Route::middleware('guest')->group( function () {
     Route::post('sign-in', [AuthController::class, 'login'])->name('login');
 
 });
+
